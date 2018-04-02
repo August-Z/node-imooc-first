@@ -26,3 +26,5 @@ let timer = setInterval(() => {
 setInterval(() => {
   eventEmitter.emit('event loop', ++i)
 }, 500)
+
+console.log(eventEmitter.listenerCount())
