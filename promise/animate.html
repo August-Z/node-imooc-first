@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Promise Animation</title>
+  <style>
+    .ball {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-top: 15px;
+    }
+
+    .ball1 {
+      background: red;
+    }
+
+    .ball2 {
+      background: yellow;
+    }
+
+    .ball3 {
+      background: green;
+    }
+  </style>
+</head>
+<body>
+<div class="ball ball1" style="margin-left: 0px;"></div>
+<div class="ball ball2" style="margin-left: 0px;"></div>
+<div class="ball ball3" style="margin-left: 0px;"></div>
+<script type="text/javascript">
+  window.onload = function () {
+
+    const ball1 = document.querySelector('.ball1')
+    const ball2 = document.querySelector('.ball2')
+    const ball3 = document.querySelector('.ball3')
+
+    const animate = (ball, distance) => {
+      return new Promise((resolve) => {
+
+        const _animate = () => {
+          setTimeout(() => {
+            let marginLeft = parseInt(ball.style.marginLeft, 10)
+
+            if (marginLeft === distance) {
+              resolve()
+            } else {
+              if (marginLeft < distance) {
+                marginLeft++
+              } else {
+                marginLeft--
+              }
+
+              ball.style.marginLeft = `${marginLeft}px`
+              _animate()
+            }
+          }, 13)
+        }
+
+        _animate()
+
+      })
+    }
+
+    animate(ball1, 100)
+      .then(() => animate(ball2, 200))
+      .then(() => animate(ball3, 300))
+      .then(() => animate(ball3, 150))
+      .then(() => animate(ball2, 150))
+      .then(() => animate(ball1, 150))
+
+  }
+</script>
+</body>
+</html>
