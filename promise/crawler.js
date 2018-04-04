@@ -22,8 +22,7 @@ Promise
 
   })
 
-
-const getPageAsync = (url) => {
+const getRequestAsync = (url) => {
   return new Promise((resolve, reject) => {
     console.log('正在爬取 ' + url)
     https.get(url, function (res) {
